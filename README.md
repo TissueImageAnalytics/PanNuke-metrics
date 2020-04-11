@@ -4,7 +4,7 @@ This repository calculates metrics on the PanNuke dataset, as reported in: <br /
 
 **"PanNuke Dataset Extension, Insights and Baselines"** <br />
 
-The PanNuke dataset can be downloaded (here)[https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke]. <br />
+The PanNuke dataset can be downloaded [here](https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke). <br />
 In the repository, the metrics that are calculated are: <br />
 
 **Binary PQ (bPQ)**: Assumes all nuclei belong to same class and reports the average PQ across tissue types. <br />
@@ -47,11 +47,11 @@ Options:
 Before running the code, ground truth and predictions must be saved in the following structure: <br />
 
 - True Masks:
-    - `<true_path>`/masks.npy
+    - `<true_path>/masks.npy`
 - True Tissue Types:
-    - `<true_path>`/types.npy
+    - `<true_path>/types.npy`
 - Prediction Masks:
-    - `<pred_path>`/masks.npy
+    - `<pred_path>/masks.npy`
 
 
 ## Citation
@@ -68,8 +68,6 @@ If using this code, please cite: <br />
   organization={Springer}
 }
 ```
-and
-
 ```
 @article{gamper2020pannuke,
   title={PanNuke Dataset Extension, Insights and Baselines},
