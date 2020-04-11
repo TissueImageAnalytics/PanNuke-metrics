@@ -4,7 +4,7 @@ This repository calculates metrics on the PanNuke dataset, as reported in: <br /
 
 **"PanNuke Dataset Extension, Insights and Baselines"** <br />
 
-The PanNuke dataset can be downloaded (here)[https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke]. <br />
+The PanNuke dataset can be downloaded [here](https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke). <br />
 In the repository, the metrics that are calculated are: <br />
 
 **Binary PQ (bPQ)**: Assumes all nuclei belong to same class and reports the average PQ across tissue types. <br />
