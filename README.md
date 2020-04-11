@@ -47,11 +47,11 @@ Options:
 Before running the code, ground truth and predictions must be saved in the following structure: <br />
 
 - True Masks:
-    - `<true_path>`/masks.npy
+    - `<true_path>/masks.npy`
 - True Tissue Types:
-    - `<true_path>`/types.npy
+    - `<true_path>/types.npy`
 - Prediction Masks:
-    - `<pred_path>`/masks.npy
+    - `<pred_path>/masks.npy`
 
 
 ## Citation
@@ -68,8 +68,6 @@ If using this code, please cite: <br />
   organization={Springer}
 }
 ```
-and
-
 ```
 @article{gamper2020pannuke,
   title={PanNuke Dataset Extension, Insights and Baselines},
