@@ -15,6 +15,7 @@ Options:
 
 
 import docopt
+import os
 import numpy as np
 import pandas as pd
 from utils import get_fast_pq, remap_label, binarize
@@ -66,9 +67,9 @@ def main(args):
     if not os.path.exists(save_path):
         os.mkdir(save_path)
 
-    true_path = true_root + '\masks.npy'  # path to the GT for a specific split
-    pred_path = pred_root + '\masks.npy'  # path to the predictions for a specific split
-    types_path = true_root + '\\types.npy' # path to the nuclei types 
+    true_path = os.path.join(true_root,'masks.npy')  # path to the GT for a specific split
+    pred_path = os.path.join(pred_root,'masks.npy')  # path to the predictions for a specific split
+    types_path = os.path.join(true_root,'types.npy') # path to the nuclei types 
 
     # load the data
     true = np.load(true_path) 
