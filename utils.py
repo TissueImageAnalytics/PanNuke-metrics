@@ -134,18 +134,10 @@ def remap_label(pred, by_size=False):
     return new_pred
 ####
 
-
-def binarize(x):
-    '''
-    convert multichannel (multiclass) instance segmetation tensor
-    to binary instance segmentation (bg and nuclei),
-
-    :param x: B*B*C (for PanNuke 256*256*5 )
-    :return: Instance segmentation
-    '''
+def binarize(x, chans):
     out = np.zeros([x.shape[0], x.shape[1]])
     count = 1
-    for i in range(x.shape[2]):
+    for i in range(chans):
         x_ch = x[:,:,i]
         unique_vals = np.unique(x_ch)
         unique_vals = unique_vals.tolist()
@@ -154,7 +146,7 @@ def binarize(x):
             x_tmp = x_ch == j
             x_tmp_c = 1- x_tmp
             out *= x_tmp_c
-            out += count*x_tmp
+            out += count*pred_tmp
             count += 1
     out = out.astype('int32')
     return out
