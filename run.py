@@ -46,8 +46,8 @@ def main(args):
     """
     This function returns the statistics reported on the PanNuke dataset, reported in the paper below:
 
-    Gamper, Jevgenij, Navid Alemi Koohbanani, Simon Graham, Mostafa Jahanifar, Syed Ali Khurram, 
-    Ayesha Azam, Katherine Hewitt, and Nasir Rajpoot. 
+    Gamper, Jevgenij, Navid Alemi Koohbanani, Simon Graham, Mostafa Jahanifar, Syed Ali Khurram,
+    Ayesha Azam, Katherine Hewitt, and Nasir Rajpoot.
     "PanNuke Dataset Extension, Insights and Baselines." arXiv preprint arXiv:2003.10778 (2020).
 
     Args:
@@ -68,11 +68,11 @@ def main(args):
         os.mkdir(save_path)
 
     true_path = os.path.join(true_root,'masks.npy')  # path to the GT for a specific split
-    pred_path = os.path.join(pred_root,'masks.npy')  # path to the predictions for a specific split
-    types_path = os.path.join(true_root,'types.npy') # path to the nuclei types 
+    pred_path = os.path.join(pred_root, 'masks.npy')  # path to the predictions for a specific split
+    types_path = os.path.join(true_root,'types.npy') # path to the nuclei types
 
     # load the data
-    true = np.load(true_path) 
+    true = np.load(true_path)
     pred = np.load(pred_path)
     types = np.load(types_path)
 
@@ -82,8 +82,8 @@ def main(args):
     # loop over the images
     for i in range(true.shape[0]):
         pq = []
-        pred_bin = binarize(pred[i,:,:,:5], 5)
-        true_bin = binarize(true[i,:,:,:5], 5)
+        pred_bin = binarize(pred[i,:,:,:5])
+        true_bin = binarize(true[i,:,:,:5])
 
         if len(np.unique(true_bin)) == 1:
             pq_bin = np.nan # if ground truth is empty for that class, skip from calculation
@@ -100,7 +100,7 @@ def main(args):
             true_tmp = remap_label(true_tmp)
 
             if len(np.unique(true_tmp)) == 1:
-                pq = np.nan # if ground truth is empty for that class, skip from calculation
+                pq_tmp = np.nan # if ground truth is empty for that class, skip from calculation
             else:
                 [_, _, pq_tmp] , _ = get_fast_pq(true_tmp, pred_tmp) # compute PQ
 
@@ -116,7 +116,7 @@ def main(args):
     #class metric
     neo_PQ = np.nanmean([pq[0] for pq in mPQ_all])
     inflam_PQ = np.nanmean([pq[1] for pq in mPQ_all])
-    conn_PQ = np.nanmean([pq[2] for pq in mPQ_all)
+    conn_PQ = np.nanmean([pq[2] for pq in mPQ_all])
     dead_PQ = np.nanmean([pq[3] for pq in mPQ_all])
     nonneo_PQ = np.nanmean([pq[4] for pq in mPQ_all])
 
@@ -127,12 +127,12 @@ def main(args):
     print('Inflammatory PQ: {}'.format(inflam_PQ))
     print('Connective PQ: {}'.format(conn_PQ))
     print('Dead PQ: {}'.format(dead_PQ))
-    print('Non-Neoplastic PQ: {}'.format(nonneo))
+    print('Non-Neoplastic PQ: {}'.format(nonneo_PQ))
     print('-' * 40)
 
     # Save per-class metrics as a csv file
     for_dataframe = {'Class Name': ['Neoplastic', 'Inflam', 'Connective', 'Dead', 'Non-Neoplastic'],
-                        'PQ': [neo_PQ, inflamm_PQ, conn_PQ, dead_PQ, nonneo_PQ]}
+                        'PQ': [neo_PQ, conn_PQ, conn_PQ, dead_PQ, nonneo_PQ]}
     df = pd.DataFrame(for_dataframe, columns=['Tissue name', 'PQ'])
     df.to_csv(save_path + '/class_stats.csv')
 
@@ -145,20 +145,19 @@ def main(args):
         print('{} PQ: {} '.format(tissue_name, np.nanmean(tissue_PQ)))
         tissue_PQ_bin = [bPQ_each_image[i] for i in indices]
         print('{} PQ binary: {} '.format(tissue_name, np.nanmean(tissue_PQ_bin)))
-        all_tissue_PQ.append(np.nanmean(tissue_PQ))
-        all_tissue_PQ_bin.append(np.nanmean(tissue_PQ_bin))
+        all_tissue_mPQ.append(np.nanmean(tissue_PQ))
+        all_tissue_bPQ.append(np.nanmean(tissue_PQ_bin))
 
     # Save per-tissue metrics as a csv file
     for_dataframe = {'Tissue name': tissue_types + ['mean'],
-                        'PQ': all_tissue_PQ + [np.nanmean(all_tissue_PQ)] , 'PQ bin': all_tissue_PQ_bin + [np.nanmean(all_tissue_PQ_bin)]}
+                        'PQ': all_tissue_mPQ + [np.nanmean(all_tissue_mPQ)] , 'PQ bin': all_tissue_bPQ + [np.nanmean(all_tissue_bPQ)]}
     df = pd.DataFrame(for_dataframe, columns=['Tissue name', 'PQ', 'PQ bin'])
     df.to_csv(save_path + '/tissue_stats.csv')
 
     # Show overall metrics - mPQ is average PQ over the classes and the tissues, bPQ is average binary PQ over the tissues
     print('-' * 40)
-    print('Average mPQ:{}'.format(np.nanmean(all_tissue_PQ)))
-    print('Average bPQ:{}'.format(np.nanmean(all_tissue_PQ_bin)))
-
+    print('Average mPQ:{}'.format(np.nanmean(all_tissue_mPQ)))
+    print('Average bPQ:{}'.format(np.nanmean(all_tissue_bPQ)))
 
 #####
 if __name__ == '__main__':
