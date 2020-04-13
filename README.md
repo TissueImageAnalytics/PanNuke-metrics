@@ -56,6 +56,7 @@ Before running the code, ground truth and predictions must be saved in the follo
 - Prediction Masks:
     - `<pred_path>/masks.npy`
 
+Here, prediction masks are saved in the same format as the true masks. i.e a single `Nx256x256xC` array, where `N` is the number of test images in that specific fold and `C` is the number of positive classes. The ordering of the channels from index `0` to `4` is `neoplastic`, `inflammatory`, `connective tissue`, `dead` and `non-neoplastic epithelial`.
 
 ## Citation
 
