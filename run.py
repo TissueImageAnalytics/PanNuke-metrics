@@ -113,14 +113,14 @@ def main(args):
     mPQ_each_image = [np.nanmean(pq) for pq in mPQ_all]
     bPQ_each_image = [np.nanmean(pq_bin) for pq_bin in bPQ_all]
 
-    #class metric
+    # class metric
     neo_PQ = np.nanmean([pq[0] for pq in mPQ_all])
     inflam_PQ = np.nanmean([pq[1] for pq in mPQ_all])
     conn_PQ = np.nanmean([pq[2] for pq in mPQ_all])
     dead_PQ = np.nanmean([pq[3] for pq in mPQ_all])
     nonneo_PQ = np.nanmean([pq[4] for pq in mPQ_all])
 
-    #Print for each class
+    # Print for each class
     print('Printing calculated metrics on a single split')
     print('-'*40)
     print('Neoplastic PQ: {}'.format(neo_PQ))
@@ -136,7 +136,7 @@ def main(args):
     df = pd.DataFrame(for_dataframe, columns=['Tissue name', 'PQ'])
     df.to_csv(save_path + '/class_stats.csv')
 
-    #Print tissue wise
+    # Print for each tissue
     all_tissue_mPQ = []
     all_tissue_bPQ = []
     for tissue_name in tissue_types:
