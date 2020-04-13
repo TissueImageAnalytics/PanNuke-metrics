@@ -7,13 +7,16 @@ This repository calculates metrics on the PanNuke dataset, as reported in: <br /
 The PanNuke dataset can be downloaded [here](https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke). <br />
 In the repository, the metrics that are calculated are: <br />
 
-**Binary PQ (bPQ)**: Assumes all nuclei belong to same class and reports the average PQ across tissue types. <br />
-**Multi-Class PQ (mPQ)**: Reports the average PQ across the classes and tissue types. <br />
-**Neoplastic PQ**: Reports the PQ for the neoplastic class on all tissues. <br />
-**Non-Neoplastic PQ**: Reports the PQ for the non-neoplastic class on all tissues. <br />
-**Inflammatory PQ**: Reports the PQ for the inflammatory class on all tissues. <br />
-**Connective PQ**: Reports the PQ for the connective class on all tissues. <br />
-**Dead PQ**: Reports the PQ for the dead class on all tissues. <br />
+- **Binary PQ (bPQ)**: Assumes all nuclei belong to same class and reports the average PQ across tissue types. <br />
+- **Multi-Class PQ (mPQ)**: Reports the average PQ across the classes and tissue types. <br />
+- **Neoplastic PQ**: Reports the PQ for the neoplastic class on all tissues. <br />
+- **Non-Neoplastic PQ**: Reports the PQ for the non-neoplastic class on all tissues. <br />
+- **Inflammatory PQ**: Reports the PQ for the inflammatory class on all tissues. <br />
+- **Connective PQ**: Reports the PQ for the connective class on all tissues. <br />
+- **Dead PQ**: Reports the PQ for the dead class on all tissues. <br />
+
+
+For detection based metrics, please refer to [this function](https://github.com/vqdang/hover_net/blob/master/src/compute_stats.py#L13)
 
 ## Set up envrionment
 
