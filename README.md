@@ -16,7 +16,7 @@ In the repository, the metrics that are calculated are: <br />
 - **Dead PQ**: Reports the PQ for the dead class on all tissues. <br />
 
 
-For detection based metrics, please refer to [this function](https://github.com/vqdang/hover_net/blob/master/src/compute_stats.py#L13)
+For detection based metrics, we used [this function](https://github.com/vqdang/hover_net/blob/master/src/compute_stats.py#L13).
 
 ## Set up envrionment
 
