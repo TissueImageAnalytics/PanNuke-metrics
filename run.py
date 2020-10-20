@@ -161,5 +161,5 @@ def main(args):
 
 #####
 if __name__ == '__main__':
-    args = docopt(__doc__, version='PanNuke Evaluation v1.0')
+    args = docopt.docopt(__doc__, version='PanNuke Evaluation v1.0')
     main(args)
